@@ -1,0 +1,1337 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/17/2021 3:41:23 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-573A3AR"
+  DTS:CreatorName="DESKTOP-573A3AR\ThinkBook"
+  DTS:DTSID="{6216A9EF-B1F6-4F40-BF0F-B0FAE0263F21}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.152"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{73DA87C9-FD45-440C-86E5-6893D54D6A30}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Cache_Excel]"
+      DTS:CreationName="CACHE"
+      DTS:DTSID="{78632764-AD60-46B4-B96B-E29509709430}"
+      DTS:ObjectName="Cache_Excel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager>
+          <DTS:CacheColumns>
+            <DTS:CacheColumn
+              DTS:DataType="129"
+              DTS:Length="255"
+              DTS:CodePage="1251"
+              DTS:IndexPosition="1"
+              DTS:ObjectName="Copy of CustomerName"
+              DTS:DTSID="{9512F84A-1B5C-44A0-86A8-AA8127BE9D1D}"
+              DTS:CreationName="" />
+            <DTS:CacheColumn
+              DTS:DataType="3"
+              DTS:ObjectName="Copy of SaleAmt"
+              DTS:DTSID="{8E912991-91E1-4BFA-A30C-E33E2C747649}"
+              DTS:CreationName="" />
+          </DTS:CacheColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{1455D256-3358-4495-B4CD-B7013476BE8F}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\ThinkBook\Desktop\Tab_Customer\Parts\Part65.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Load_Customer_Destinition"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{96DBE62B-5BB5-4CE3-96A1-5BE8F811ACC5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Load_Customer_Destinition"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Load_Customer_Destinition\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Customer_Destinition\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\Data Conversion.Inputs[Data Conversion Input].Columns[CustomerName]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="CustomerName"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Customer_Destinition\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DFT_Load_Customer_Destinition\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomerName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Load_Customer_Destinition\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomerName]"
+                      name="Copy of CustomerName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Customer_Destinition\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DFT_Load_Customer_Destinition\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Customer_Destinition\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Customer_Destinition\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Customer_Destinition\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml"></property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_Customer_Destinition\Lookup.Connections[OleDbConnection]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Customer_Destinition\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Customer_Destinition\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT_Load_Customer_Destinition\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Customer_Destinition\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT_Load_Customer_Destinition\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Load_Customer_Destinition\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT_Load_Customer_Destinition\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Customer_Destinition\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Customer_Destinition\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Customer_dest]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{A235A936-28A9-41D0-8268-886772C493E0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-573A3AR.dars25]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerId]"
+                      cachedDataType="i4"
+                      cachedName="CustomerId"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerId]"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerId]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerName]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="CustomerName"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StreetAddress]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="StreetAddress"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StreetAddress]"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[StreetAddress]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[State]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Region]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]" />
+                    <inputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of SaleAmt]"
+                      cachedDataType="i4"
+                      cachedName="Copy of SaleAmt"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SaleAmt]"
+                      lineageId="Package\DFT_Load_Customer_Destinition\151:invalid" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerId]"
+                      dataType="i4"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="StreetAddress" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SaleAmt]"
+                      dataType="i4"
+                      name="SaleAmt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Load_Customer_Destinition\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Customer_Src]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{A235A936-28A9-41D0-8268-886772C493E0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-573A3AR.dars25]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      name="CustomerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      length="100"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      name="CustomerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StreetAddress]"
+                      length="100"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[StreetAddress]"
+                      name="StreetAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="100"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="2"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      length="2"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]"
+                      name="Region"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      dataType="i4"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="StreetAddress" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="Region" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      name="CustomerId" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      name="CustomerName" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StreetAddress]"
+                      name="StreetAddress" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      name="Region" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Load_Customer_Destinition.Paths[Data Conversion Output]"
+              endId="Package\DFT_Load_Customer_Destinition\Lookup.Inputs[Lookup Input]"
+              name="Data Conversion Output"
+              startId="Package\DFT_Load_Customer_Destinition\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DFT_Load_Customer_Destinition.Paths[Lookup Match Output]"
+              endId="Package\DFT_Load_Customer_Destinition\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\DFT_Load_Customer_Destinition\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT_Load_Customer_Destinition.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Load_Customer_Destinition\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_Load_Customer_Destinition\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Excel Cache Transformation"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C88D1F4E-C099-4193-BA59-C6AA7062CE68}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Excel Cache Transformation"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Excel Cache Transformation\Cache Transform"
+              componentClassID="Microsoft.Cache"
+              contactInfo="Cache Transform;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Writes data to a cache (a .caw file) with the Cache Connection Manager. Reuse the cache between multiple Lookup transforms to reduce database load. Share the cache to reduce memory usage. Note: cache data is stored in clear text and not recommended for sensitive data."
+              name="Cache Transform">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Excel Cache Transformation\Cache Transform.Connections[CacheConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Cache_Excel]"
+                  connectionManagerRefId="Package.ConnectionManagers[Cache_Excel]"
+                  description="The connection used to access the cache."
+                  name="CacheConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Excel Cache Transformation\Cache Transform.Inputs[Cache Input]"
+                  hasSideEffects="true"
+                  name="Cache Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Excel Cache Transformation\Cache Transform.Inputs[Cache Input].Columns[Copy of CustomerName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of CustomerName"
+                      lineageId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomerName]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="The cache column associated with the input column."
+                          name="CacheColumnName">Copy of CustomerName</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Excel Cache Transformation\Cache Transform.Inputs[Cache Input].Columns[Copy of SaleAmt]"
+                      cachedDataType="i4"
+                      cachedName="Copy of SaleAmt"
+                      lineageId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SaleAmt]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="The cache column associated with the input column."
+                          name="CacheColumnName">Copy of SaleAmt</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Excel Cache Transformation\Cache Transform.Outputs[Cache Output]"
+                  name="Cache Output"
+                  synchronousInputId="Package\Excel Cache Transformation\Cache Transform.Inputs[Cache Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel Cache Transformation\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Excel Cache Transformation\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Excel Cache Transformation\Data Conversion.Inputs[Data Conversion Input].Columns[CustomerName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CustomerName"
+                      lineageId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].Columns[CustomerName]" />
+                    <inputColumn
+                      refId="Package\Excel Cache Transformation\Data Conversion.Inputs[Data Conversion Input].Columns[SaleAmt]"
+                      cachedDataType="r8"
+                      cachedName="SaleAmt"
+                      lineageId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].Columns[SaleAmt]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Excel Cache Transformation\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomerName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomerName]"
+                      name="Copy of CustomerName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].Columns[CustomerName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SaleAmt]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SaleAmt]"
+                      name="Copy of SaleAmt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].Columns[SaleAmt]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Excel Cache Transformation\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Excel Cache Transformation\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Sheet1$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Excel Cache Transformation\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].Columns[CustomerName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].ExternalColumns[CustomerName]"
+                      length="255"
+                      lineageId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].Columns[CustomerName]"
+                      name="CustomerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].Columns[SaleAmt]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].ExternalColumns[SaleAmt]"
+                      lineageId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].Columns[SaleAmt]"
+                      name="SaleAmt"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].ExternalColumns[CustomerName]"
+                      dataType="wstr"
+                      length="255"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output].ExternalColumns[SaleAmt]"
+                      dataType="r8"
+                      name="SaleAmt" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Error Output].Columns[CustomerName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Error Output].Columns[CustomerName]"
+                      name="CustomerName" />
+                    <outputColumn
+                      refId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Error Output].Columns[SaleAmt]"
+                      dataType="r8"
+                      lineageId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Error Output].Columns[SaleAmt]"
+                      name="SaleAmt" />
+                    <outputColumn
+                      refId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Excel Cache Transformation.Paths[Data Conversion Output]"
+              endId="Package\Excel Cache Transformation\Cache Transform.Inputs[Cache Input]"
+              name="Data Conversion Output"
+              startId="Package\Excel Cache Transformation\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Excel Cache Transformation.Paths[Excel Source Output]"
+              endId="Package\Excel Cache Transformation\Data Conversion.Inputs[Data Conversion Input]"
+              name="Excel Source Output"
+              startId="Package\Excel Cache Transformation\Excel Source.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{738ED07A-D4B3-45D8-BE19-3FA1CB0EDD14}"
+      DTS:From="Package\Excel Cache Transformation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFT_Load_Customer_Destinition" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="232.8,41.6"
+          Id="Package\DFT_Load_Customer_Destinition"
+          TopLeft="228.613044528788,211.393941073948" />
+        <NodeLayout
+          Size="209.6,41.6"
+          Id="Package\Excel Cache Transformation"
+          TopLeft="235.833323962159,70.6000005610784" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="342.823184245473,112.200000561078">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,99.1939405128691"
+              Start="0,0"
+              End="0,91.6939405128691">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,91.6939405128691" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_Load_Customer_Destinition">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\DFT_Load_Customer_Destinition\OLE DB Source"
+          TopLeft="288.717937245329,59.2666671376758" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\DFT_Load_Customer_Destinition\OLE DB Destination"
+          TopLeft="315.117508845876,398.055558719017" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\DFT_Load_Customer_Destinition\Lookup"
+          TopLeft="304.888876747203,239.055557455398" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Customer_Destinition.Paths[Lookup Match Output]"
+          TopLeft="381.288876747202,280.655557455398">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19.4286320986739,117.400001263619"
+              Start="0,0"
+              End="19.4286320986739,109.900001263619">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.7000006318093" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54.7000006318093"
+                    Point2="0,58.7000006318093"
+                    Point3="4,58.7000006318093" />
+                  <mssgle:LineSegment
+                    End="15.4286320986739,58.7000006318093" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.4286320986739,58.7000006318093"
+                    Point2="19.4286320986739,58.7000006318093"
+                    Point3="19.4286320986739,62.7000006318093" />
+                  <mssgle:LineSegment
+                    End="19.4286320986739,109.900001263619" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-47.345723013163,63.7000006318093,114.120078125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\DFT_Load_Customer_Destinition\Data Conversion"
+          TopLeft="313.222209749399,132.166667717033" />
+        <EdgeLayout
+          Id="Package\DFT_Load_Customer_Destinition.Paths[OLE DB Source Output]"
+          TopLeft="364.717937245329,100.866667137676">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="26.5042725040701,31.3000005793572"
+              Start="0,0"
+              End="26.5042725040701,23.8000005793572">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.6500002896786" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.6500002896786"
+                    Point2="0,15.6500002896786"
+                    Point3="4,15.6500002896786" />
+                  <mssgle:LineSegment
+                    End="22.5042725040701,15.6500002896786" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5042725040701,15.6500002896786"
+                    Point2="26.5042725040701,15.6500002896786"
+                    Point3="26.5042725040701,19.6500002896786" />
+                  <mssgle:LineSegment
+                    End="26.5042725040701,23.8000005793572" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Load_Customer_Destinition.Paths[Data Conversion Output]"
+          TopLeft="391.222209749399,173.766667717033">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.93333300219638,65.2888897383655"
+              Start="0,0"
+              End="-9.93333300219638,57.7888897383655">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.6444448691827" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.6444448691827"
+                    Point2="0,32.6444448691827"
+                    Point3="-4,32.6444448691827" />
+                  <mssgle:LineSegment
+                    End="-5.93333300219638,32.6444448691827" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.93333300219638,32.6444448691827"
+                    Point2="-9.93333300219638,32.6444448691827"
+                    Point3="-9.93333300219638,36.6444448691827" />
+                  <mssgle:LineSegment
+                    End="-9.93333300219638,57.7888897383655" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Excel Cache Transformation">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Excel Cache Transformation\Excel Source"
+          TopLeft="233.928571428572,53.6904761904762" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Excel Cache Transformation\Data Conversion"
+          TopLeft="238.461538461538,136.923076923077" />
+        <EdgeLayout
+          Id="Package\Excel Cache Transformation.Paths[Excel Source Output]"
+          TopLeft="303.928571428572,95.2904761904762">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.532967032967,41.6326007326008"
+              Start="0,0"
+              End="12.532967032967,34.1326007326008">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.8163003663004" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.8163003663004"
+                    Point2="0,20.8163003663004"
+                    Point3="4,20.8163003663004" />
+                  <mssgle:LineSegment
+                    End="8.53296703296695,20.8163003663004" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.53296703296695,20.8163003663004"
+                    Point2="12.532967032967,20.8163003663004"
+                    Point3="12.532967032967,24.8163003663004" />
+                  <mssgle:LineSegment
+                    End="12.532967032967,34.1326007326008" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Excel Cache Transformation\Cache Transform"
+          TopLeft="246.153846153846,240.769230769231" />
+        <EdgeLayout
+          Id="Package\Excel Cache Transformation.Paths[Data Conversion Output]"
+          TopLeft="316.461538461538,178.523076923077">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.89230769230772,62.2461538461538"
+              Start="0,0"
+              End="8.89230769230772,54.7461538461538">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.1230769230769" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.1230769230769"
+                    Point2="0,31.1230769230769"
+                    Point3="4,31.1230769230769" />
+                  <mssgle:LineSegment
+                    End="4.89230769230772,31.1230769230769" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.89230769230772,31.1230769230769"
+                    Point2="8.89230769230772,31.1230769230769"
+                    Point3="8.89230769230772,35.1230769230769" />
+                  <mssgle:LineSegment
+                    End="8.89230769230772,54.7461538461538" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Excel Cache Transformation\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Customer_Destinition\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Load_Customer_Destinition\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

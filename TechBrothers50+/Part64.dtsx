@@ -1,0 +1,1859 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/16/2021 10:15:53 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-573A3AR"
+  DTS:CreatorName="DESKTOP-573A3AR\ThinkBook"
+  DTS:DTSID="{E25E2507-95CF-4465-9354-5DED4B8EEEA8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.152"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{8F346792-587D-4392-A18E-FF45342F6B62}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Cache Connection Manager]"
+      DTS:CreationName="CACHE"
+      DTS:DTSID="{9256280A-5BB4-4B1C-821B-A72E95A8A39F}"
+      DTS:ObjectName="Cache Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"C:\\Users\\ThinkBook\\Desktop\\Tab_Customer\\MyTest.caw"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:UseFile="True"
+          DTS:ConnectionString="C:\Users\ThinkBook\Desktop\Tab_Customer\MyTest.caw">
+          <DTS:CacheColumns>
+            <DTS:CacheColumn
+              DTS:DataType="129"
+              DTS:Length="50"
+              DTS:CodePage="1251"
+              DTS:IndexPosition="1"
+              DTS:ObjectName="CustomerName"
+              DTS:DTSID="{C8A63C05-D160-4D43-8092-941493D86B35}"
+              DTS:CreationName="" />
+            <DTS:CacheColumn
+              DTS:DataType="3"
+              DTS:ObjectName="SaleAmt"
+              DTS:DTSID="{26E3FBF9-7477-4588-A71B-56B68BA21ACD}"
+              DTS:CreationName="" />
+          </DTS:CacheColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{E7568482-C69D-4C0C-829F-6BDE93465492}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1251"
+          DTS:ConnectionString="C:\Users\ThinkBook\Desktop\Tab_Customer\Parts\Part63.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CustomerName"
+              DTS:DTSID="{F19043E2-DA92-4E3E-806E-FEE5649C1169}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SaleAmt"
+              DTS:DTSID="{5FFC791B-262C-433A-BBF5-0A5692713F35}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Cache File"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7497B160-F187-4A9B-BD7C-567EC48ED319}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Cache File"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Create Cache File\Cache Transform"
+              componentClassID="Microsoft.Cache"
+              contactInfo="Cache Transform;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Writes data to a cache (a .caw file) with the Cache Connection Manager. Reuse the cache between multiple Lookup transforms to reduce database load. Share the cache to reduce memory usage. Note: cache data is stored in clear text and not recommended for sensitive data."
+              name="Cache Transform"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Create Cache File\Cache Transform.Connections[CacheConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Cache Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Cache Connection Manager]"
+                  description="The connection used to access the cache."
+                  name="CacheConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Create Cache File\Cache Transform.Inputs[Cache Input]"
+                  hasSideEffects="true"
+                  name="Cache Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Create Cache File\Cache Transform.Inputs[Cache Input].Columns[CustomerName]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerName"
+                      lineageId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output].Columns[CustomerName]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="The cache column associated with the input column."
+                          name="CacheColumnName">CustomerName</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Create Cache File\Cache Transform.Inputs[Cache Input].Columns[SaleAmt]"
+                      cachedDataType="i4"
+                      cachedName="SaleAmt"
+                      lineageId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output].Columns[SaleAmt]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="The cache column associated with the input column."
+                          name="CacheColumnName">SaleAmt</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Create Cache File\Cache Transform.Outputs[Cache Output]"
+                  name="Cache Output"
+                  synchronousInputId="Package\Create Cache File\Cache Transform.Inputs[Cache Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Create Cache File\Flat File Source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Flat File Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Create Cache File\Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output].Columns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CustomerName]"
+                      length="50"
+                      lineageId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output].Columns[CustomerName]"
+                      name="CustomerName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output].Columns[SaleAmt]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SaleAmt]"
+                      lineageId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output].Columns[SaleAmt]"
+                      name="SaleAmt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SaleAmt]"
+                      dataType="i4"
+                      name="SaleAmt" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1251"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Create Cache File.Paths[Flat File Source Output]"
+              endId="Package\Create Cache File\Cache Transform.Inputs[Cache Input]"
+              name="Flat File Source Output"
+              startId="Package\Create Cache File\Flat File Source.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CustomerSrc Table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6AD7F2D8-5403-4EE9-B312-F5E332752206}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CustomerSrc Table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CustomerSrc Table\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from () [refTable]
+where [refTable].[CustomerName] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerName" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1251"/&gt;&lt;referenceColumn name="SaleAmt" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CustomerSrc Table\Lookup.Connections[CacheConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Cache Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Cache Connection Manager]"
+                  description="Connection manager used to access lookup data."
+                  name="CacheConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CustomerSrc Table\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CustomerSrc Table\Lookup.Inputs[Lookup Input].Columns[CustomerName]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="CustomerName"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerName</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CustomerSrc Table\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\CustomerSrc Table\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\Lookup.Outputs[Lookup Match Output].Columns[SaleAmt]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\CustomerSrc Table\Lookup.Outputs[Lookup Match Output].Columns[SaleAmt]"
+                      name="SaleAmt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">SaleAmt</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CustomerSrc Table\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\CustomerSrc Table\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CustomerSrc Table\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\CustomerSrc Table\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CustomerSrc Table\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Customer_dest]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CustomerSrc Table\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{A235A936-28A9-41D0-8268-886772C493E0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-573A3AR.dars25]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerId]"
+                      cachedDataType="i4"
+                      cachedName="CustomerId"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerId]"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerId]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerName]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="CustomerName"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StreetAddress]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="StreetAddress"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StreetAddress]"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[StreetAddress]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[State]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Region]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SaleAmt]"
+                      cachedDataType="i4"
+                      cachedName="SaleAmt"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SaleAmt]"
+                      lineageId="Package\CustomerSrc Table\Lookup.Outputs[Lookup Match Output].Columns[SaleAmt]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerId]"
+                      dataType="i4"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="StreetAddress" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SaleAmt]"
+                      dataType="i4"
+                      name="SaleAmt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CustomerSrc Table\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CustomerSrc Table\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from Customer_Src</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CustomerSrc Table\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{A235A936-28A9-41D0-8268-886772C493E0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-573A3AR.dars25]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      name="CustomerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      length="100"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      name="CustomerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StreetAddress]"
+                      length="100"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[StreetAddress]"
+                      name="StreetAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="100"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="2"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      length="2"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]"
+                      name="Region"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      dataType="i4"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="StreetAddress" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="Region" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      name="CustomerId" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      name="CustomerName" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StreetAddress]"
+                      name="StreetAddress" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      name="Region" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CustomerSrc Table.Paths[Lookup Match Output]"
+              endId="Package\CustomerSrc Table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\CustomerSrc Table\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\CustomerSrc Table.Paths[OLE DB Source Output]"
+              endId="Package\CustomerSrc Table\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\CustomerSrc Table\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CustomerSrc2 Table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7decb638-2b2e-433a-b993-c3b66da36730}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CustomerSrc2 Table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CustomerSrc2 Table\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from () [refTable]
+where [refTable].[CustomerName] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerName" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1251"/&gt;&lt;referenceColumn name="SaleAmt" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CustomerSrc2 Table\Lookup.Connections[CacheConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Cache Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Cache Connection Manager]"
+                  description="Connection manager used to access lookup data."
+                  name="CacheConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CustomerSrc2 Table\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CustomerSrc2 Table\Lookup.Inputs[Lookup Input].Columns[CustomerName]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="CustomerName"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerName</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\CustomerSrc2 Table\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup Match Output].Columns[SaleAmt]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup Match Output].Columns[SaleAmt]"
+                      name="SaleAmt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">SaleAmt</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\CustomerSrc2 Table\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\CustomerSrc2 Table\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CustomerSrc2 Table\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Customer_dest]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CustomerSrc2 Table\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{A235A936-28A9-41D0-8268-886772C493E0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-573A3AR.dars25]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerId]"
+                      cachedDataType="i4"
+                      cachedName="CustomerId"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerId]"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerId]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerName]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="CustomerName"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StreetAddress]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="StreetAddress"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StreetAddress]"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[StreetAddress]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[State]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Region]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]" />
+                    <inputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SaleAmt]"
+                      cachedDataType="i4"
+                      cachedName="SaleAmt"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SaleAmt]"
+                      lineageId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup Match Output].Columns[SaleAmt]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerId]"
+                      dataType="i4"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="StreetAddress" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SaleAmt]"
+                      dataType="i4"
+                      name="SaleAmt" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CustomerSrc2 Table\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CustomerSrc2 Table\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from Customer_Src2</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CustomerSrc2 Table\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{A235A936-28A9-41D0-8268-886772C493E0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-573A3AR.dars25]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      name="CustomerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      length="100"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      name="CustomerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StreetAddress]"
+                      length="100"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[StreetAddress]"
+                      name="StreetAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="100"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="2"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      length="2"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Region]"
+                      name="Region"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      dataType="i4"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="StreetAddress" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      name="Region" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      name="CustomerId" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      name="CustomerName" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StreetAddress]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StreetAddress]"
+                      name="StreetAddress" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      codePage="1251"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      name="Region" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CustomerSrc2 Table.Paths[Lookup Match Output]"
+              endId="Package\CustomerSrc2 Table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\CustomerSrc2 Table\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\CustomerSrc2 Table.Paths[OLE DB Source Output]"
+              endId="Package\CustomerSrc2 Table\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\CustomerSrc2 Table\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D53AE8B4-14B7-40B3-9AB2-F7B1F7D3F709}"
+      DTS:From="Package\Create Cache File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\CustomerSrc Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{ED48EDCE-D55C-444D-A199-1548019E5DAC}"
+      DTS:From="Package\CustomerSrc Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\CustomerSrc2 Table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Create Cache File"
+          TopLeft="287.361099692407,80.6000006405513" />
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\CustomerSrc Table"
+          TopLeft="292.222210610355,172.033334700532" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="372.391655151381,122.200000640551">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.8333340599803"
+              Start="0,0"
+              End="0,42.3333340599803">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.3333340599803" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\CustomerSrc2 Table"
+          TopLeft="306.972209997752,285.277780044962" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="376.222210610355,213.633334700532">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="17.5499993873966,71.6444453444304"
+              Start="0,0"
+              End="17.5499993873966,64.1444453444304">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.8222226722152" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.8222226722152"
+                    Point2="0,35.8222226722152"
+                    Point3="4,35.8222226722152" />
+                  <mssgle:LineSegment
+                    End="13.5499993873966,35.8222226722152" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.5499993873966,35.8222226722152"
+                    Point2="17.5499993873966,35.8222226722152"
+                    Point3="17.5499993873966,39.8222226722152" />
+                  <mssgle:LineSegment
+                    End="17.5499993873966,64.1444453444304" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Create Cache File">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151.2,41.6"
+          Id="Package\Create Cache File\Flat File Source"
+          TopLeft="339.999986489614,73.6666672521167" />
+        <NodeLayout
+          Size="158.4,48"
+          Id="Package\Create Cache File\Cache Transform"
+          TopLeft="345.454531727416,168.606061946021" />
+        <EdgeLayout
+          Id="Package\Create Cache File.Paths[Flat File Source Output]"
+          TopLeft="415.599986489614,115.266667252117">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.05454523780122,53.3393946939045"
+              Start="0,0"
+              End="9.05454523780122,45.8393946939045">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.6696973469522" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.6696973469522"
+                    Point2="0,26.6696973469522"
+                    Point3="4,26.6696973469522" />
+                  <mssgle:LineSegment
+                    End="5.05454523780122,26.6696973469522" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.05454523780122,26.6696973469522"
+                    Point2="9.05454523780122,26.6696973469522"
+                    Point3="9.05454523780122,30.6696973469522" />
+                  <mssgle:LineSegment
+                    End="9.05454523780122,45.8393946939045" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\CustomerSrc Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\CustomerSrc Table\OLE DB Source"
+          TopLeft="463.666666666667,66" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\CustomerSrc Table\Lookup"
+          TopLeft="484.166666666667,180" />
+        <EdgeLayout
+          Id="Package\CustomerSrc Table.Paths[OLE DB Source Output]"
+          TopLeft="540.116666666667,107.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72.4000000000001"
+              Start="0,0"
+              End="0,64.9000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.9000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\CustomerSrc Table\OLE DB Destination"
+          TopLeft="452.5,371.666666666667" />
+        <EdgeLayout
+          Id="Package\CustomerSrc Table.Paths[Lookup Match Output]"
+          TopLeft="539.333333333333,221.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,150.066666666667"
+              Start="0,0"
+              End="0,142.566666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,142.566666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,65.4786458333333,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CustomerSrc Table\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CustomerSrc Table\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CustomerSrc Table\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\CustomerSrc2 Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\CustomerSrc2 Table\Lookup"
+          TopLeft="484.166666666667,180" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\CustomerSrc2 Table\OLE DB Destination"
+          TopLeft="452.5,371.666666666667" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\CustomerSrc2 Table\OLE DB Source"
+          TopLeft="463.666666666667,66" />
+        <EdgeLayout
+          Id="Package\CustomerSrc2 Table.Paths[Lookup Match Output]"
+          TopLeft="539.333333333333,221.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,150.066666666667"
+              Start="0,0"
+              End="0,142.566666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,142.566666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,65.4786458333335,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CustomerSrc2 Table.Paths[OLE DB Source Output]"
+          TopLeft="540.116666666667,107.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72.4000000000001"
+              Start="0,0"
+              End="0,64.9000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.9000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CustomerSrc2 Table\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CustomerSrc2 Table\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CustomerSrc2 Table\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
